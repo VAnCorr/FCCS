@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Reconocimiento Paciente Grave | Cronograma Completo</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- AOS (Animate on Scroll) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            /* Light Mode Colors */
+            --body-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --container-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: white;
+            --card-header-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-color: #dee2e6;
+            --border-light: #ecf0f1;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --header-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-color-hover: rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode {
+            /* Dark Mode Colors */
+            --body-bg: linear-gradient(135deg, #232526 0%, #414345 100%);
+            --container-bg: rgba(44, 47, 51, 0.95);
+            --card-bg: #2c2f33;
+            --card-header-bg: linear-gradient(135deg, #3a3f44 0%, #2c2f33 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #a4a4a4;
+            --border-color: #4f545c;
+            --border-light: #40444b;
+            --accent-color: #58a6ff;
+            --success-color: #2ecc71;
+            --header-gradient: linear-gradient(135deg, #16222A 0%, #3A6073 100%);
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --shadow-color-hover: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--body-bg);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .header {
+            background: var(--header-gradient);
+            background-size: 200% 200%;
+            animation: gradient-animation 10s ease infinite;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* --- Dark Mode Toggle --- */
+        .theme-switch-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+        .theme-switch input {
+            display:none;
+        }
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #764ba2;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .theme-switch-wrapper .fa-sun, .theme-switch-wrapper .fa-moon {
+            font-size: 1.2rem;
+            color: white;
+            opacity: 0.8;
+            margin: 0 8px;
+        }
+        /* --- End Dark Mode Toggle --- */
+
+
+        .calendar-grid {
+            padding: 30px;
+        }
+
+        .class-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px var(--shadow-color-hover);
+        }
+
+        .card-header {
+            background: var(--card-header-bg);
+            padding: 20px;
+            border-bottom: 2px solid var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .class-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .participants {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .participant {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+        }
+        
+        .participant i {
+            font-size: 1.5rem;
+            width: 35px;
+            text-align: center;
+        }
+        
+        .fa-chalkboard-user { color: #9b59b6; }
+        .fa-user-tie { color: #27ae60; }
+
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .objectives-toggle {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .objectives-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        .objectives-toggle .fa-bullseye {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .objectives-toggle.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .objectives-list {
+            list-style: none;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            color: var(--text-primary);
+        }
+
+        .objectives-list.expanded {
+            max-height: 1000px;
+            opacity: 1;
+            padding-top: 15px;
+        }
+
+        .objectives-list li {
+            padding: 10px 0 10px 25px;
+            border-bottom: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .objectives-list li:last-child {
+            border-bottom: none;
+        }
+
+        .objectives-list .fa-check {
+            position: absolute;
+            left: 0;
+            top: 14px;
+            color: var(--success-color);
+            font-size: 1rem;
+        }
+
+        /* --- Evaluation Card Style --- */
+        .evaluation-card {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border-left: 5px solid #d68910;
+        }
+
+        .evaluation-card .card-header {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .evaluation-card .class-title,
+        .evaluation-card .participant {
+            color: white;
+        }
+        
+        .evaluation-card .fa-chalkboard-user, .evaluation-card .fa-user-tie {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .participants {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .calendar-grid {
+                padding: 20px;
+            }
+            .theme-switch-wrapper {
+                position: static;
+                justify-content: center;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="theme-switch-wrapper">
+                <i class="fas fa-sun"></i>
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider"></div>
+                </label>
+                <i class="fas fa-moon"></i>
+            </div>
+            <h1>CURSO RECONOCIMIENTO PACIENTE GRAVE</h1>
+            <p>Programa de Especialización en Cuidados Intensivos</p>
+        </header>
+
+        <main class="calendar-grid">
+            <!-- Julio -->
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">8 de Julio 2025</div>
+                    <h2 class="class-title">Criterios de ingreso a UCI y Escalas de puntuación de severidad</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Alfredo Flores</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Yader Altamirano</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Conocer los criterios de ingreso a la unidad de cuidados intensivos.</li>
+                        <li><i class="fa-solid fa-check"></i>Analizar las escalas APACHE II, SOFA y SAPS para evaluación de severidad.</li>
+                        <li><i class="fa-solid fa-check"></i>Interpretar puntajes de pronóstico y mortalidad en pacientes críticos.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">11 de Julio 2025</div>
+                    <h2 class="class-title">Transporte del paciente grave y Equipos de respuesta rápida</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Hellen Suazo</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Jose Lopez</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Estudiar la planificación y protocolos del transporte seguro del paciente crítico.</li>
+                        <li><i class="fa-solid fa-check"></i>Comprender la coordinación y liderazgo de equipos de respuesta rápida (ERT).</li>
+                        <li><i class="fa-solid fa-check"></i>Analizar protocolos de estabilización pre-transporte y durante el traslado.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                 <div class="card-header">
+                    <div class="date-badge">15 de Julio 2025</div>
+                    <h2 class="class-title">Ultrasonografía en UCI: Bases y acceso vascular</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Jorge Soza</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Engels Delgado</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Comprender los fundamentos físicos y técnicos de la ultrasonografía.</li>
+                        <li><i class="fa-solid fa-check"></i>Estudiar las técnicas de acceso vascular guiado por ultrasonido.</li>
+                        <li><i class="fa-solid fa-check"></i>Analizar la prevención de complicaciones asociadas al acceso vascular.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">18 de Julio 2025</div>
+                    <h2 class="class-title">Ultrasonografía pulmonar en UCI</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Yordan Arauz</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Denis Vanegas</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Estudiar el protocolo BLUE para diagnóstico diferencial de disnea aguda.</li>
+                        <li><i class="fa-solid fa-check"></i>Conocer los signos ultrasonográficos de neumonía, derrame pleural y neumotórax.</li>
+                        <li><i class="fa-solid fa-check"></i>Comprender la evaluación del estado de aireación pulmonar mediante scoring.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">22 de Julio 2025</div>
+                    <h2 class="class-title">POCUS Cardiaco en UCI</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Alfredo Flores</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Gustavo Espinoza</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Comprender la ecocardiografía básica (FOCUS) para evaluación hemodinámica.</li>
+                        <li><i class="fa-solid fa-check"></i>Estudiar la evaluación de función ventricular izquierda y derecha.</li>
+                        <li><i class="fa-solid fa-check"></i>Conocer la detección de derrame pericárdico y signos de taponamiento.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">25 de Julio 2025</div>
+                    <h2 class="class-title">Doppler transcraneal en el adulto y VNO</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Hellen Suazo</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Berman Mendoza</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Comprender las técnicas Doppler para evaluación del flujo y hemodinámica.</li>
+                        <li><i class="fa-solid fa-check"></i>Estudiar la medición de la vaina del nervio óptico (VNO) para detectar HIC.</li>
+                        <li><i class="fa-solid fa-check"></i>Analizar la evaluación de la responsividad a fluidos (VCI).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">28 de Julio 2025</div>
+                    <h2 class="class-title">Insuficiencia respiratoria aguda</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Jorge Soza</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Mauricio Manzanarez</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Clasificar y diagnosticar los tipos de insuficiencia respiratoria aguda.</li>
+                        <li><i class="fa-solid fa-check"></i>Comprender las estrategias de oxigenoterapia y VNI.</li>
+                        <li><i class="fa-solid fa-check"></i>Conocer los criterios de intubación endotraqueal.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Agosto -->
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">4 de Agosto 2025</div>
+                    <h2 class="class-title">Generalidades de ventilación mecánica</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Yordan Arauz</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Yader Altamirano</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Comprender los principios fisiológicos y modos básicos de ventilación mecánica.</li>
+                        <li><i class="fa-solid fa-check"></i>Estudiar la configuración de parámetros ventilatorios según patología.</li>
+                        <li><i class="fa-solid fa-check"></i>Conocer las estrategias de ventilación protectora pulmonar.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">8 de Agosto 2025</div>
+                    <h2 class="class-title">Monitoreo de balance de oxígeno y ácido-base</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Alfredo Flores</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Jose Lopez</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Interpretar análisis de gases arteriales y venosos en el paciente crítico.</li>
+                        <li><i class="fa-solid fa-check"></i>Comprender el significado de la saturación venosa de oxígeno (SvO2/ScvO2).</li>
+                        <li><i class="fa-solid fa-check"></i>Analizar el lactato como marcador de hipoperfusión tisular.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card evaluation-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">12 de Agosto 2025</div>
+                    <h2 class="class-title">Primera Evaluación</h2>
+                     <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Evaluadores:</strong> Cuerpo docente del curso</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">15 de Agosto 2025</div>
+                    <h2 class="class-title">Choque: diagnóstico y tratamiento</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Jorge Soza</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Denis Vanegas</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Diferenciar los tipos de choque (hipovolémico, cardiogénico, distributivo, obstructivo).</li>
+                        <li><i class="fa-solid fa-check"></i>Aplicar los pasos iniciales de manejo y reanimación del paciente en choque.</li>
+                        <li><i class="fa-solid fa-check"></i>Conocer las metas de monitoreo hemodinámico y el uso de vasopresores.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">19 de Agosto 2025</div>
+                    <h2 class="class-title">Trastornos hidroelectrolíticos severos: Potasio</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Yordan Arauz</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Gustavo Espinoza</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Identificar las causas y manifestaciones clínicas de la hiper e hipokalemia.</li>
+                        <li><i class="fa-solid fa-check"></i>Reconocer las alteraciones electrocardiográficas asociadas.</li>
+                        <li><i class="fa-solid fa-check"></i>Aplicar los protocolos de manejo de emergencia para la hiperkalemia severa.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">22 de Agosto 2025</div>
+                    <h2 class="class-title">Trastornos hidroelectrolíticos severos: Sodio</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Alfredo Flores</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Berman Mendoza</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Diagnosticar y clasificar la hiponatremia e hipernatremia.</li>
+                        <li><i class="fa-solid fa-check"></i>Calcular los déficits de agua y establecer ritmos de corrección seguros.</li>
+                        <li><i class="fa-solid fa-check"></i>Analizar estrategias para prevenir la mielinólisis pontina central.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">26 de Agosto 2025</div>
+                    <h2 class="class-title">Intoxicaciones: Fosfina, Opiáceos, BZD, Tricíclicos</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Hellen Suazo</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Mauricio Manzanarez</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Reconocer los toxíndromes asociados a las principales intoxicaciones.</li>
+                        <li><i class="fa-solid fa-check"></i>Conocer el uso y las indicaciones de antídotos específicos.</li>
+                        <li><i class="fa-solid fa-check"></i>Establecer el manejo de soporte vital avanzado en el paciente intoxicado.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">29 de Agosto 2025</div>
+                    <h2 class="class-title">ATLS: Evaluación y Resucitación Inicial</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Jorge Soza</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Yader Altamirano</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Aplicar la secuencia de la evaluación primaria (ABCDE) en el paciente traumatizado.</li>
+                        <li><i class="fa-solid fa-check"></i>Identificar y manejar las amenazas inmediatas para la vida.</li>
+                        <li><i class="fa-solid fa-check"></i>Comprender los componentes de la evaluación secundaria y la reevaluación.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Septiembre -->
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">1 de Septiembre 2025</div>
+                    <h2 class="class-title">ATLS: Trauma de Tórax</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Yordan Arauz</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Jose Lopez</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Diagnosticar y tratar las 6 lesiones torácicas letales.</li>
+                        <li><i class="fa-solid fa-check"></i>Realizar procedimientos de emergencia como la toracocentesis con aguja.</li>
+                        <li><i class="fa-solid fa-check"></i>Conocer las indicaciones para una toracotomía de emergencia.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">5 de Septiembre 2025</div>
+                    <h2 class="class-title">ATLS: Trauma de Abdomen</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Alfredo Flores</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Engels Delgado</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Interpretar los hallazgos del examen FAST en el trauma abdominal.</li>
+                        <li><i class="fa-solid fa-check"></i>Identificar las indicaciones para una laparotomía exploradora.</li>
+                        <li><i class="fa-solid fa-check"></i>Manejar el trauma pélvico y las lesiones de órganos sólidos.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">9 de Septiembre 2025</div>
+                    <h2 class="class-title">ATLS: Trauma Craneoencefálico (TEC)</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Hellen Suazo</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Denis Vanegas</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Aplicar la Escala de Coma de Glasgow para clasificar la severidad del TEC.</li>
+                        <li><i class="fa-solid fa-check"></i>Reconocer signos de herniación cerebral y aumento de la presión intracraneal.</li>
+                        <li><i class="fa-solid fa-check"></i>Implementar las medidas iniciales para el manejo del TEC severo.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">12 de Septiembre 2025</div>
+                    <h2 class="class-title">ATLS: Trauma de Columna</h2>
+                    <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-chalkboard-user"></i><span><strong>Expositor:</strong> Jorge Soza</span></div>
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Docente:</strong> Gustavo Espinoza</span></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <button class="objectives-toggle"><i class="fa-solid fa-bullseye"></i>Objetivos de Aprendizaje<span class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></span></button>
+                    <ul class="objectives-list">
+                        <li><i class="fa-solid fa-check"></i>Aplicar técnicas adecuadas de inmovilización espinal.</li>
+                        <li><i class="fa-solid fa-check"></i>Realizar un examen neurológico para identificar el nivel de la lesión.</li>
+                        <li><i class="fa-solid fa-check"></i>Diferenciar entre shock neurogénico y shock espinal.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="class-card evaluation-card" data-aos="fade-up">
+                <div class="card-header">
+                    <div class="date-badge">19 de Septiembre 2025</div>
+                    <h2 class="class-title">Segunda Evaluación Final</h2>
+                     <div class="participants">
+                        <div class="participant"><i class="fa-solid fa-user-tie"></i><span><strong>Evaluadores:</strong> Cuerpo docente del curso</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- AOS (Animate on Scroll) JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // --- INICIALIZACIÓN DE AOS ---
+        AOS.init({
+            duration: 700,
+            once: true,
+            offset: 100,
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- LÓGICA PARA EXPANDIR/CONTRAER OBJETIVOS ---
+            const toggleButtons = document.querySelectorAll('.objectives-toggle');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const list = this.nextElementSibling;
+                    this.classList.toggle('expanded');
+                    list.classList.toggle('expanded');
+                });
+            });
+
+            // --- LÓGICA PARA EL MODO OSCURO ---
+            const toggleSwitch = document.querySelector('#checkbox');
+            const currentTheme = localStorage.getItem('theme');
+
+            if (currentTheme) {
+                document.body.classList.add(currentTheme);
+                if (currentTheme === 'dark-mode') {
+                    toggleSwitch.checked = true;
+                }
+            }
+
+            function switchTheme(e) {
+                if (e.target.checked) {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light-mode');
+                }
+            }
+
+            toggleSwitch.addEventListener('change', switchTheme, false);
+        });
+    </script>
+</body>
+</html>
